@@ -1,5 +1,10 @@
 # Historical logs
 
+## Version 0.3.0
+
+- Release date: Dec 16, 2020...
+- Added getParamMessage helper function
+
 ## Version 0.2.0
 
 - Release date: Dec 13, 2020...

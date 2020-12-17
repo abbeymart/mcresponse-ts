@@ -6,6 +6,7 @@
  */
 
 import { stdResMessages } from "./stdResMessages";
+import { MessageObject } from "../../mc-mail/src";
 
 export interface ResponseMessage {
     code: string;
@@ -52,4 +53,14 @@ export function getResMessage(msgType: string, options?: ResponseMessageOptions)
         message = options && options.message ? `${stdResMessages["unknown"].message} | ${options.message}` : stdResMessages["unknown"].message;
     }
     return msgFunc(code, resCode, resMessage, message, value);
+}
+
+export function getParamsMessage(msgObject: MessageObject, msgType = "unknown"): ResponseMessage {
+    let messages = "";
+    Object.entries(msgObject).forEach(([key, msg]) => {
+        messages = messages ? `${messages} | ${key} : ${msg}` : `${key} : ${msg}`;
+    });
+    return getResMessage(msgType, {
+        message: messages,
+    });
 }
