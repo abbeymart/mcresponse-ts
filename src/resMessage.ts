@@ -6,7 +6,6 @@
  */
 
 import { stdResMessages } from "./stdResMessages";
-import { MessageObject } from "../../mc-mail/src";
 
 export interface ResponseMessage {
     code: string;
@@ -14,6 +13,10 @@ export interface ResponseMessage {
     resMessage: string;
     message: string;
     value: any;
+}
+
+export interface MessageObject {
+    [key: string]: string;
 }
 
 export interface ResponseMessageOptions {
