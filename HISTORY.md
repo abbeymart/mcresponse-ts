@@ -1,10 +1,14 @@
 # Historical logs
 
+## Version 0.4.1
+
+- Release date: June 06, 2021
+- Refactored 304 HTTPStatusCode to other code to include body response
+
 ## Version 0.4.0
 
 - Release date: Dec 16, 2020...
 - Added network-status-code helper functions
-
 
 ## Version 0.3.0
 
