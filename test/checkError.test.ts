@@ -7,8 +7,7 @@
 
 // import mctest from "@mconnect/mctest";
 import { assertEquals, assertNotEquals, mcTest, postTestResult } from "@mconnect/mctest";
-import { Status } from '../../mc-config';
-import { getResMessage } from "../src";
+import { Status, getResMessage } from "../src";
 
 let msgType = 'checkError',
     options = {

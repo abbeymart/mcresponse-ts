@@ -1,5 +1,10 @@
 # Historical logs
 
+## Version 0.5.0
+
+- Release date: April 26, 2022
+- Refactored get response message function
+
 ## Version 0.4.1
 
 - Release date: June 06, 2021

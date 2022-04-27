@@ -6,8 +6,7 @@
  */
 
 import { assertEquals, assertNotEquals, mcTest, postTestResult } from '@mconnect/mctest';
-import { Status } from '../../mc-config';
-import { getResMessage } from "../src";
+import { Status, getResMessage } from '../src';
 
 let msgType = 'success',
     options = {
@@ -60,6 +59,20 @@ let msgType = 'success',
             }
             const req = getResMessage(msgType, options);
             assertEquals(req.message.includes(options.message), true, `response should be: true`);
+        }
+    });
+
+    await mcTest({
+        name    : 'should return correct custom message',
+        testFunc: () => {
+            options = {
+                value  : ['a', 'b', 'c'],
+                code   : '',
+                message: 'custom completed successfully',
+            }
+            const req = getResMessage("authCode", options);
+            assertEquals(req.code, "authCode", `response should be: authCode`);
+            assertEquals(req.message === options.message, true, `response should be: true`);
         }
     });
 

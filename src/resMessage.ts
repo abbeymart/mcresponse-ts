@@ -41,24 +41,26 @@ export function getResMessage(msgType: string, options?: ResponseMessageOptions)
         resMessage: string,
         message: string;
 
-    if (msgType && stdResMessages[msgType]) {
-        code = stdResMessages[msgType].code;
-        value = options && options.value ? options.value : stdResMessages[msgType].value;
-        resCode = stdResMessages[msgType].resCode;
-        resMessage = stdResMessages[msgType].resMessage;
-        message = options && options.message ? `${stdResMessages[msgType].message} | ${options.message}` : stdResMessages[msgType].message;
+    const val = stdResMessages[msgType]
+    if (val) {
+        code = val.code;
+        value = options && options.value ? options.value : val.value;
+        resCode = val.resCode;
+        resMessage = val.resMessage;
+        message = options && options.message ? `${options.message}` : val.message;
     } else {
         // use stdResMessages default response
-        value = options && options.value ? options.value : stdResMessages["unknown"].value;
-        code = msgType || stdResMessages["unknown"].code;
-        resCode = stdResMessages["unknown"].resCode;
-        resMessage = stdResMessages["unknown"].resMessage;
-        message = options && options.message ? `${stdResMessages["unknown"].message} | ${options.message}` : stdResMessages["unknown"].message;
+        const val = stdResMessages["unknown"]
+        value = options && options.value ? options.value : val.value;
+        code = msgType || val.code;
+        resCode = val.resCode;
+        resMessage = val.resMessage;
+        message = options && options.message ? `${options.message}` : val.message;
     }
     return msgFunc(code, resCode, resMessage, message, value);
 }
 
-export function getParamsMessage(msgObject: MessageObject, msgType = "unknown"): ResponseMessage {
+export function getParamsMessage(msgObject: MessageObject, msgType = "paramsError"): ResponseMessage {
     let messages = "";
     Object.entries(msgObject).forEach(([key, msg]) => {
         messages = messages ? `${messages} | ${key} : ${msg}` : `${key} : ${msg}`;
