@@ -1,5 +1,10 @@
 # Historical logs
 
+## Version 0.5.1
+
+- Release date: May 18, 2022
+- Updated-deps-mctest
+
 ## Version 0.5.0
 
 - Release date: April 26, 2022
