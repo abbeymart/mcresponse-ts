@@ -7,21 +7,31 @@
 
 import { Status, StatusText } from "./netStatusCode";
 
-interface ResponseMessage {
+export interface ResponseMessage {
     code: string;
-    resCode: number;
-    resMessage: string,
     message: string;
     value: any;
+    resCode?: number;
+    resMessage?: string;
 }
 
 interface MessageParam {
     [key: string]: ResponseMessage;
 }
 
+export interface MessageObject {
+    [key: string]: string;
+}
+
+export interface ResponseMessageOptions {
+    msgType?: string;
+    message?: string;
+    value?: any;
+}
+
 // message options => code, resCode, reMessage, message, value
 export const stdResMessages: MessageParam = {
-    paramsError   : {
+    paramsError  : {
         code      : "paramsError",
         resCode   : Status.NotAcceptable,
         resMessage: StatusText.get(Status.NotAcceptable) || "Not Acceptable",
@@ -154,7 +164,7 @@ export const stdResMessages: MessageParam = {
         message   : "Document/record exists",
         value     : "",
     },
-    unknown       : {
+    unknown      : {
         code      : "unknown",
         resCode   : Status.UnprocessableEntity,
         resMessage: StatusText.get(Status.UnprocessableEntity) || "Not Processed",

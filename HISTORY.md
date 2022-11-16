@@ -1,5 +1,10 @@
 # Historical logs
 
+## Version 0.6.0
+
+- Release date: Nov 16, 2022
+- refactored-types - v0.6.0
+
 ## Version 0.5.2
 
 - Release date: May 18, 2022

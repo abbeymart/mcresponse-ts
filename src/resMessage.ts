@@ -5,32 +5,15 @@
  * @Description: @mconnect/res-messages, response-messages | utility functions
  */
 
-import { stdResMessages } from "./stdResMessages";
+import { stdResMessages, ResponseMessage, MessageObject, ResponseMessageOptions } from "./stdResMessages";
 
-export interface ResponseMessage {
-    code: string;
-    resCode: number;
-    resMessage: string;
-    message: string;
-    value: any;
-}
-
-export interface MessageObject {
-    [key: string]: string;
-}
-
-export interface ResponseMessageOptions {
-    message?: string;
-    value?: any;
-}
-
-function msgFunc(code: string, resCode: number, resMessage: string, msg: string, value: any): ResponseMessage {
+function msgFunc(res: ResponseMessage): ResponseMessage {
     return {
-        code      : code,
-        resCode   : resCode,
-        resMessage: resMessage,
-        value     : value,
-        message   : msg,
+        code      : res.code,
+        message   : res.message,
+        value     : res.value,
+        resCode   : res.resCode,
+        resMessage: res.resMessage,
     };
 }
 
@@ -41,30 +24,32 @@ export function getResMessage(msgType: string, options?: ResponseMessageOptions)
         resMessage: string,
         message: string;
 
-    const val = stdResMessages[msgType]
+    const messageType = msgType || options?.msgType || "unknown"
+
+    const val = stdResMessages[messageType]
     if (val) {
         code = val.code;
         value = options && options.value ? options.value : val.value;
-        resCode = val.resCode;
-        resMessage = val.resMessage;
+        resCode = val.resCode || 404;
+        resMessage = val.resMessage || "";
         message = options && options.message ? `${options.message}` : val.message;
     } else {
         // use stdResMessages default response
         const val = stdResMessages["unknown"]
         value = options && options.value ? options.value : val.value;
-        code = msgType || val.code;
-        resCode = val.resCode;
-        resMessage = val.resMessage;
+        code = messageType || val.code;
+        resCode = val.resCode || 404;
+        resMessage = val.resMessage || "";
         message = options && options.message ? `${options.message}` : val.message;
     }
-    return msgFunc(code, resCode, resMessage, message, value);
+    return msgFunc({code, message, value, resCode, resMessage});
 }
 
 export function getParamsMessage(msgObject: MessageObject, msgType = "paramsError"): ResponseMessage {
     let messages = "";
-    Object.entries(msgObject).forEach(([key, msg]) => {
+    for (const [key, msg] of Object.entries(msgObject)) {
         messages = messages ? `${messages} | ${key} : ${msg}` : `${key} : ${msg}`;
-    });
+    }
     return getResMessage(msgType, {
         message: messages,
     });
