@@ -5,9 +5,10 @@
  * @Description: @mconnect/res-messages, response-messages | utility functions
  */
 
-import { stdResMessages, ResponseMessage, MessageObject, ResponseMessageOptions } from "./stdResMessages";
+import { stdResMessages, ResponseMessage, MessageObject, ResponseMessageOptions, MessageCodes } from "./stdResMessages";
+import { Status } from "./netStatusCode";
 
-function msgFunc(res: ResponseMessage): ResponseMessage {
+function msgFunc<T>(res: ResponseMessage<T>): ResponseMessage<T> {
     return {
         code      : res.code,
         message   : res.message,
@@ -17,35 +18,35 @@ function msgFunc(res: ResponseMessage): ResponseMessage {
     };
 }
 
-export function getResMessage(msgType: string, options?: ResponseMessageOptions): ResponseMessage {
-    let value: any,
+export function getResMessage<T>(msgType: string, options?: ResponseMessageOptions<T>): ResponseMessage<T> {
+    let value: T,
         code: string,
         resCode: number,
         resMessage: string,
         message: string;
 
-    const messageType = msgType || options?.msgType || "unknown"
+    const messageType = msgType || options?.msgType || MessageCodes.unknown
 
     const val = stdResMessages[messageType]
     if (val) {
         code = val.code;
-        value = options && options.value ? options.value : val.value;
-        resCode = val.resCode || 404;
+        value = options?.value ? options.value : val.value;
+        resCode = val.resCode || Status.NotFound;
         resMessage = val.resMessage || "";
-        message = options && options.message ? `${options.message}` : val.message;
+        message = options?.message ? `${options.message}` : val.message;
     } else {
         // use stdResMessages default response
-        const val = stdResMessages["unknown"]
-        value = options && options.value ? options.value : val.value;
+        const val = stdResMessages[MessageCodes.unknown]
+        value = options?.value ? options.value : val.value;
         code = messageType || val.code;
-        resCode = val.resCode || 404;
+        resCode = val.resCode || Status.NotFound;
         resMessage = val.resMessage || "";
-        message = options && options.message ? `${options.message}` : val.message;
+        message = options?.message ? `${options.message}` : val.message;
     }
     return msgFunc({code, message, value, resCode, resMessage});
 }
 
-export function getParamsMessage(msgObject: MessageObject, msgType = "paramsError"): ResponseMessage {
+export function getParamsMessage<T>(msgObject: MessageObject, msgType = MessageCodes.paramsError): ResponseMessage<T> {
     let messages = "";
     for (const [key, msg] of Object.entries(msgObject)) {
         messages = messages ? `${messages} | ${key} : ${msg}` : `${key} : ${msg}`;

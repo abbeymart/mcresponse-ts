@@ -1,5 +1,9 @@
 # Historical logs
 
+## Version 0.7.0
+- Release date: Oct-29-2023
+- refactored-to-concrete-types-v0.7.0
+
 ## Version 0.6.0
 
 - Release date: Nov 16, 2022

@@ -3,6 +3,7 @@
  * @Company: Copyright 2020 Abi Akindele  | mConnect.biz
  * @License: All Rights Reserved | LICENSE.md
  * @Description: mc: success scenarios testing
+ * RUN command: ts-node <path-to-test-scripts-file>
  */
 
 import { assertEquals, assertNotEquals, mcTest, postTestResult } from '@mconnect/mctest';
