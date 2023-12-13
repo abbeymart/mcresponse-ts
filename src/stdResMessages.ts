@@ -7,11 +7,6 @@
 
 import { Status, StatusText } from "./netStatusCode";
 
-/**
- * @deprecated
- * ValueType is deprecated, kept for backward compatibility
- */
-//
 export type ValueType =
     | Record<string, unknown>
     | Array<Record<string, unknown>>
@@ -22,26 +17,26 @@ export type ValueType =
     | boolean
     | Array<boolean>;
 
-export interface ResponseMessage<T> {
+export interface ResponseMessage {
     code: string;
     message: string;
-    value: T;
+    value: any;
     resCode: number;
     resMessage: string;
 }
 
-interface MessageParam<T> {
-    [key: string]: ResponseMessage<T>;
+interface MessageParam {
+    [key: string]: ResponseMessage;
 }
 
 export interface MessageObject {
     [key: string]: string;
 }
 
-export interface ResponseMessageOptions<T> {
+export interface ResponseMessageOptions{
     msgType?: string;
     message?: string;
-    value?: T;
+    value?: any;
 }
 
 export enum MessageCodes {
@@ -70,7 +65,7 @@ export enum MessageCodes {
 
 
 // message options => code, resCode, reMessage, message, value
-export const stdResMessages: MessageParam<any> = {
+export const stdResMessages: MessageParam = {
     paramsError  : {
         code      : MessageCodes.paramsError,
         resCode   : Status.NotAcceptable,

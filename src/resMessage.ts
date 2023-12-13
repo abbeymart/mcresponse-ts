@@ -5,10 +5,12 @@
  * @Description: @mconnect/res-messages, response-messages | utility functions
  */
 
-import { stdResMessages, ResponseMessage, MessageObject, ResponseMessageOptions, MessageCodes } from "./stdResMessages";
+import {
+    stdResMessages, ResponseMessage, MessageObject, ResponseMessageOptions, MessageCodes,
+} from "./stdResMessages";
 import { Status } from "./netStatusCode";
 
-function msgFunc<T>(res: ResponseMessage<T>): ResponseMessage<T> {
+function msgFunc(res: ResponseMessage): ResponseMessage {
     return {
         code      : res.code,
         message   : res.message,
@@ -18,8 +20,8 @@ function msgFunc<T>(res: ResponseMessage<T>): ResponseMessage<T> {
     };
 }
 
-export function getResMessage<T>(msgType: string, options?: ResponseMessageOptions<T>): ResponseMessage<T> {
-    let value: T,
+export function getResMessage(msgType: string, options?: ResponseMessageOptions): ResponseMessage {
+    let value: any,
         code: string,
         resCode: number,
         resMessage: string,
@@ -46,12 +48,13 @@ export function getResMessage<T>(msgType: string, options?: ResponseMessageOptio
     return msgFunc({code, message, value, resCode, resMessage});
 }
 
-export function getParamsMessage<T>(msgObject: MessageObject, msgType = MessageCodes.paramsError): ResponseMessage<T> {
+export function getParamsMessage(msgObject: MessageObject, msgType = MessageCodes.paramsError): ResponseMessage {
     let messages = "";
     for (const [key, msg] of Object.entries(msgObject)) {
         messages = messages ? `${messages} | ${key} : ${msg}` : `${key} : ${msg}`;
     }
     return getResMessage(msgType, {
         message: messages,
+        value: {},
     });
 }

@@ -1,5 +1,10 @@
 # Historical logs
 
+## Version 0.8.0
+- Release date: Dec-12-2023
+- removed-generic-typing-v0.8.0
+
+
 ## Version 0.7.0
 - Release date: Oct-29-2023
 - refactored-to-concrete-types-v0.7.0
