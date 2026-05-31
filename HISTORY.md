@@ -1,9 +1,12 @@
 # Historical logs
 
+## Version 0.9.0
+- Release date: TBD
+- updated-deps...-v0.9.0 (May-31-2026)
+
 ## Version 0.8.0
 - Release date: Dec-12-2023
 - removed-generic-typing-v0.8.0
-
 
 ## Version 0.7.0
 - Release date: Oct-29-2023
