@@ -1,8 +1,8 @@
 # Historical logs
 
-## Version 0.9.0
+## Version 0.8.1
 - Release date: TBD
-- updated-deps...-v0.9.0 (May-31-2026)
+- updated-deps-tsconfig-and-comments-v0.8.1 (May-31-2026)
 
 ## Version 0.8.0
 - Release date: Dec-12-2023
