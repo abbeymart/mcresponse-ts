@@ -1,5 +1,9 @@
 # Historical logs
 
+## Version 0.9.0
+- Release date: June-05-2026
+- updated-mctest_v0.6.2-rewrite-testcases-v0.9.0
+
 ## Version 0.8.2
 - Release date: May-31-2026
 - updated-package-deps-v0.8.2 (May-31-2026)
